@@ -1,5 +1,9 @@
-@extends('projects.layout')
+@extends('layouts.app')
 @section('content')
+
+
+
+
 
 <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -33,18 +37,17 @@
             $categoryName = $category->name;
         ?>
         <tr>
-            <td>{{ ++$i }}</td>
+            <td>{{ $project->id }}</td>
             <td>{{ $project->title }}</td>
             <td>{{ $project->description }}</td>
             <td>{{ $categoryName }}</td>
             <td>{{ $project->status }}</td>
             <td>
                 <form action="{{ route('projects.destroy',$project->id) }}" method="POST">
-   
+  
                     <!-- <a class="btn btn-info" href="{{ route('projects.show',$project->id) }}">Show</a> -->
-    
+
                     <a class="btn btn-primary" href="{{ url('projects/edit',$project->id) }}">Edit</a>
-   
                     @csrf
                     @method('DELETE')
                     <input type="hidden" name="hdn_id" value="{{ $project->id}}" />
@@ -53,8 +56,5 @@
             </td>
         </tr>
         @endforeach
-    </table>
-  
-    {!! $projects->links() !!}
-      
+    </table>      
 @endsection

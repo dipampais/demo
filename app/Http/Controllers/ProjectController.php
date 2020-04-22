@@ -11,7 +11,8 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::latest()->paginate(5);
-        return view('projects.index',compact('projects'))->with('i', (request()->input('page', 1) - 1) * 5);
+        $data['projects'] = $projects;
+        return view('projects.index',$data);
     }
 
     
@@ -61,8 +62,9 @@ class ProjectController extends Controller
             'category_id' => 'required',
             'status'  => 'required',
         ]);
+        
         $id = $request->hdn_id;
-
+        
         $update = [
             'title'=>$request->title,
             'description'=>$request->description,
