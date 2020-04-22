@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2020 at 01:46 AM
+-- Generation Time: Apr 23, 2020 at 12:58 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.1.32
 
@@ -131,13 +131,26 @@ INSERT INTO `projects` (`id`, `title`, `description`, `category_id`, `status`, `
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `remember_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `username`, `email`, `password`, `remember_token`, `timestamp`, `updated_at`, `created_at`) VALUES
+(1, 'Harry Potter', 'BoyWhoLived', 'harrypotter@hogwarts.edu.uk', 'caputdraconis', '', '2020-04-22 00:46:44', NULL, NULL),
+(2, 'dipam', NULL, 'dipam.parmar@gmail.com', '$2y$10$Fs7oiaLFp3ABmulTzg.loOQY8AsUQIe7idPYl9NZ/2TFZu8dvtoGm', NULL, '2020-04-22 19:58:09', '2020-04-22 10:50:53', '2020-04-22 10:50:53'),
+(3, 'david', NULL, 'currota.d@gmail.com', '$2y$10$v9qFBtKYy.LaAFIShKx7r.ck39./0Qm6aVFiLUQvTRKfGcByMRw7q', NULL, '2020-04-22 19:27:00', NULL, NULL),
+(4, 'david', NULL, 'currota.d@gmail.com', '$2y$10$dS1ZoXchAGgTAB19heIU0Ogso3gM4Fc6c17zsdcH7HblvsZvCnYL.', NULL, '2020-04-22 19:30:44', NULL, '2020-04-22 19:30:44'),
+(5, 'Nilesh Gupta', NULL, 'ngupta@gmail.com', '$2y$10$eoP2tiXIJuqOw..wg2VP6OKJCDZzwEs2dzPyoC6C64VrLnXzBPEg2', NULL, '2020-04-22 20:20:11', NULL, '2020-04-22 20:20:11'),
+(6, 'Personal Computer', NULL, 'dipam.asdasdasdparmar@gmail.com', '$2y$10$nPnjZjh5OfgLc3cV1NmkbexyRXnNF0Lecy1C5tlDITFSZHLrPgGL2', NULL, '2020-04-22 21:56:09', NULL, '2020-04-22 21:56:09');
 
 --
 -- Indexes for dumped tables
@@ -177,8 +190,7 @@ ALTER TABLE `projects`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -212,7 +224,7 @@ ALTER TABLE `projects`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
