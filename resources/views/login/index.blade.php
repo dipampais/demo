@@ -63,7 +63,7 @@
                                 <div class="col-md-8 offset-md-4">
                                    
 
-                                    <a class="btn btn-link" href="{{route('register')}}">
+                                    <a class="btn btn-link" href="{{route('/users/register')}}">
                                         {{ __('Register') }}
                                     </a>
 

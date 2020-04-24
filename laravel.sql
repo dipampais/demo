@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2020 at 12:58 AM
+-- Generation Time: Apr 24, 2020 at 03:07 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.1.32
 
@@ -134,6 +134,8 @@ CREATE TABLE `users` (
   `username` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gender` tinyint(1) DEFAULT NULL COMMENT '0 = Male, 1 = Female',
+  `profilePhoto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `remember_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -144,13 +146,15 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `username`, `email`, `password`, `remember_token`, `timestamp`, `updated_at`, `created_at`) VALUES
-(1, 'Harry Potter', 'BoyWhoLived', 'harrypotter@hogwarts.edu.uk', 'caputdraconis', '', '2020-04-22 00:46:44', NULL, NULL),
-(2, 'dipam', NULL, 'dipam.parmar@gmail.com', '$2y$10$Fs7oiaLFp3ABmulTzg.loOQY8AsUQIe7idPYl9NZ/2TFZu8dvtoGm', NULL, '2020-04-22 19:58:09', '2020-04-22 10:50:53', '2020-04-22 10:50:53'),
-(3, 'david', NULL, 'currota.d@gmail.com', '$2y$10$v9qFBtKYy.LaAFIShKx7r.ck39./0Qm6aVFiLUQvTRKfGcByMRw7q', NULL, '2020-04-22 19:27:00', NULL, NULL),
-(4, 'david', NULL, 'currota.d@gmail.com', '$2y$10$dS1ZoXchAGgTAB19heIU0Ogso3gM4Fc6c17zsdcH7HblvsZvCnYL.', NULL, '2020-04-22 19:30:44', NULL, '2020-04-22 19:30:44'),
-(5, 'Nilesh Gupta', NULL, 'ngupta@gmail.com', '$2y$10$eoP2tiXIJuqOw..wg2VP6OKJCDZzwEs2dzPyoC6C64VrLnXzBPEg2', NULL, '2020-04-22 20:20:11', NULL, '2020-04-22 20:20:11'),
-(6, 'Personal Computer', NULL, 'dipam.asdasdasdparmar@gmail.com', '$2y$10$nPnjZjh5OfgLc3cV1NmkbexyRXnNF0Lecy1C5tlDITFSZHLrPgGL2', NULL, '2020-04-22 21:56:09', NULL, '2020-04-22 21:56:09');
+INSERT INTO `users` (`id`, `name`, `username`, `email`, `password`, `gender`, `profilePhoto`, `remember_token`, `timestamp`, `updated_at`, `created_at`) VALUES
+(1, 'Harry Potter', 'BoyWhoLived', 'harrypotter@hogwarts.edu.uk', 'caputdraconis', 0, NULL, '', '2020-04-23 23:33:32', NULL, NULL),
+(2, 'dipam', NULL, 'dipam.parmar@gmail.com', '$2y$10$Fs7oiaLFp3ABmulTzg.loOQY8AsUQIe7idPYl9NZ/2TFZu8dvtoGm', 0, NULL, NULL, '2020-04-23 23:33:30', '2020-04-22 10:50:53', '2020-04-22 10:50:53'),
+(3, 'david', NULL, 'currota.d@gmail.com', '$2y$10$v9qFBtKYy.LaAFIShKx7r.ck39./0Qm6aVFiLUQvTRKfGcByMRw7q', 0, NULL, NULL, '2020-04-23 23:33:29', NULL, NULL),
+(4, 'david', NULL, 'currota.d@gmail.com', '$2y$10$dS1ZoXchAGgTAB19heIU0Ogso3gM4Fc6c17zsdcH7HblvsZvCnYL.', 0, NULL, NULL, '2020-04-23 23:33:27', NULL, '2020-04-22 19:30:44'),
+(5, 'Nilesh Gupta', NULL, 'ngupta@gmail.com', '$2y$10$eoP2tiXIJuqOw..wg2VP6OKJCDZzwEs2dzPyoC6C64VrLnXzBPEg2', 0, NULL, NULL, '2020-04-23 23:33:26', NULL, '2020-04-22 20:20:11'),
+(6, 'Personal Computer', NULL, 'dipam.asdasdasdparmar@gmail.com', '$2y$10$nPnjZjh5OfgLc3cV1NmkbexyRXnNF0Lecy1C5tlDITFSZHLrPgGL2', 0, NULL, NULL, '2020-04-23 23:33:25', NULL, '2020-04-22 21:56:09'),
+(7, 'ram', NULL, 'ram.sharma@gmail.com', '$2y$10$.O5w2U/.GIlvcNxh27pZEeNxnmOW4CVXsZ8OaOSQRmsg9518XGhtK', 0, NULL, NULL, '2020-04-23 23:33:23', '2020-04-23 12:21:55', '2020-04-23 12:21:55'),
+(8, 'shivam', NULL, 'shivam.verma@gmail.com', '$2y$10$VEbT.kdcfVtJCflDXRFagOgju89Sl5cW94J05uTmIGvtzHyTuIsSO', 0, '1587684785.jpeg', NULL, '2020-04-23 23:33:08', NULL, '2020-04-23 23:33:08');
 
 --
 -- Indexes for dumped tables
@@ -224,7 +228,7 @@ ALTER TABLE `projects`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

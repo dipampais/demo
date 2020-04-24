@@ -12,22 +12,7 @@
 */
 
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
-
-
-Route::resource('products','ProductController');
-
-Route::resource('projects','ProjectController');
-
-Route::get('/projects/edit/{id}','ProjectController@edit');
-
-Route::post('/projects/edit/{id}','ProjectController@update');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes(['register' => false]);
 
 Route::get('/', 'LoginController@index')->name('login');
 
@@ -37,15 +22,19 @@ Route::get('/password/reset', 'LoginController@resetPassword')->name('resetPassw
 
 Route::post('/password/reset', 'LoginController@changePassword')->name('password.update');
 
-Route::get('/register', 'RegisterController@index')->name('register');
+Route::get('/users/registration', 'RegisterController@index')->name('/users/register');
 
 Route::post('/register/registerUser', 'RegisterController@registerUser')->name('registerUser');
 
+Route::group(['middleware' => ['auth']], function() {
+    Route::get('/dashboard', 'DashboardController@index')->name('route.dashboard');
+    Route::get('/project', 'ProjectController@index')->name('projects');
+    Route::resource('projects','ProjectController');
+    Route::resource('products','ProductController');
+    Route::get('/projects/edit/{id}','ProjectController@edit');
+    Route::post('/projects/edit/{id}','ProjectController@update');
+    Route::get('/home', 'HomeController@index')->name('home');
+});
 
-Route::get('/dashboard', 'DashboardController@index')->name('route.dashboard');
 
-Route::get('/project', 'ProjectController@index')->name('projects');
-
-// Route::group(['middleware' => ['auth']], function() {
-//     loginauthenticate
-// });
+Auth::routes();

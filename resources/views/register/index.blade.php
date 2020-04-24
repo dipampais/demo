@@ -13,7 +13,19 @@
                 <div class="alert alert-success"> {{ $success }}</div>
                 @endif
                 <div class="card-body">
-                    <form method="POST" action="{{ route('registerUser') }}">
+
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <strong>Whoops!</strong> There were some problems with your input.
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                    <form method="POST" action="{{ route('registerUser') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
@@ -65,6 +77,43 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
+
+
+                        <!-- <div class="form-group row">
+                            <label for="gender" class="col-md-4 col-form-label text-md-right">Gender</label>
+
+                            <div class="col-md-6">
+                                <input id="gender" type="radio" class="form-control" name="gender" required autocomplete="Gender" value="0"> Male
+                                <input id="gender" type="radio" class="form-control" name="gender" required autocomplete="Gender" value="1"> Female
+                            </div>
+                        </div> -->
+
+
+                        <div class="form-group row">
+                            <label for="gender" class="col-md-4 col-form-label text-md-right">Gender</label>
+                        
+                            <div class="form-check">
+                                <label class="form-check-label"><input type="radio" class="form-check-input" name="gender" value="0">Male</label>
+                            </div>
+
+                            <div class="form-check">
+                                <label class="form-check-label"><input type="radio" class="form-check-input" name="gender" value="1">Female</label>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group row">
+                            <label for="profilePhoto" class="col-md-4 col-form-label text-md-right">{{ __('Profile Photo') }}</label>
+                            <div class="form-check">
+                                <input type="file" name="profilePhoto" class="form-control">
+                            </div>
+                            
+                            <div class="form-check">
+                                <button type="submit" class="btn btn-success">Upload</button>
+                            </div>
+                        </div>
+
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

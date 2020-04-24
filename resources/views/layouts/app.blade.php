@@ -19,6 +19,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
+
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
@@ -56,7 +57,7 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
+                            <!-- <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
@@ -72,7 +73,26 @@
                                         @csrf
                                     </form>
                                 </div>
-                            </li>
+                            </li> -->
+                            <div class="toggleDiv">
+                                <li class="nav-item dropdown">
+                                    <a  class="">
+                                        Profile <span class="caret"></span>
+                                    </a>
+                                </li>
+                            </div>
+                            <div class="card showHideProfile">
+                                <img class="imgClass" src="{{ URL::to('/') }}/images/<?php echo Auth::user()->profilePhoto; ?>" style="width:100%">
+                                <h5 class="displayName">Welcome {{ Auth::user()->name }}</h5>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                            </div>
                         @endguest
                     </ul>
                 </div>
@@ -85,3 +105,60 @@
     </div>
 </body>
 </html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    
+      $('.showHideProfile').toggle();
+    $(document).on('click','.toggleDiv',function() {
+       $('.showHideProfile').toggle('slow');
+    });
+
+</script>
+
+<style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+img.imgClass {
+    width: 150px !important;
+    border: 1px solid #671d79;
+}
+.dropdown-item:focus, .dropdown-item {
+    color: #16181b;
+    text-decoration: none;
+    background-color: #f8f9fa;
+    border: 1px solid #671d79;
+}
+</style>
