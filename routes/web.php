@@ -24,6 +24,15 @@ Route::post('/password/reset', 'LoginController@changePassword')->name('password
 
 Route::get('/users/registration', 'RegisterController@index')->name('/users/register');
 
+Route::get('/profile', 'ProfileController@editProfile')->name('editProfile');
+
+
+
+
+
+Route::post('/profile', 'ProfileController@updateProfile')->name('updateProfile');
+
+
 Route::post('/register/registerUser', 'RegisterController@registerUser')->name('registerUser');
 
 Route::group(['middleware' => ['auth']], function() {

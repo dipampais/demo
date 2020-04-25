@@ -80,9 +80,10 @@
                                         Profile <span class="caret"></span>
                                     </a>
                                 </li>
-                            </div>
+                            </div> 
                             <div class="card showHideProfile">
                                 <img class="imgClass" src="{{ URL::to('/') }}/images/<?php echo Auth::user()->profilePhoto; ?>" style="width:100%">
+                                <a href="{{ route('editProfile') }}">Edit Profile</a>
                                 <h5 class="displayName">Welcome {{ Auth::user()->name }}</h5>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -116,7 +117,7 @@
 </script>
 
 <style>
-.card {
+.showHideProfile {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   max-width: 300px;
   margin: auto;

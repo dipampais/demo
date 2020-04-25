@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2020 at 03:07 AM
+-- Generation Time: Apr 25, 2020 at 03:01 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.1.32
 
@@ -77,6 +77,13 @@ CREATE TABLE `password_resets` (
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `password_resets`
+--
+
+INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
+('dipam.parmar@gmail.com', '$2y$10$dARfntb2Tki78TlzHqqBIOY5cRa4RluZy64Ey4kLzgm7V6Dg//KbO', '2020-04-24 17:33:32');
+
 -- --------------------------------------------------------
 
 --
@@ -147,14 +154,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `email`, `password`, `gender`, `profilePhoto`, `remember_token`, `timestamp`, `updated_at`, `created_at`) VALUES
-(1, 'Harry Potter', 'BoyWhoLived', 'harrypotter@hogwarts.edu.uk', 'caputdraconis', 0, NULL, '', '2020-04-23 23:33:32', NULL, NULL),
-(2, 'dipam', NULL, 'dipam.parmar@gmail.com', '$2y$10$Fs7oiaLFp3ABmulTzg.loOQY8AsUQIe7idPYl9NZ/2TFZu8dvtoGm', 0, NULL, NULL, '2020-04-23 23:33:30', '2020-04-22 10:50:53', '2020-04-22 10:50:53'),
-(3, 'david', NULL, 'currota.d@gmail.com', '$2y$10$v9qFBtKYy.LaAFIShKx7r.ck39./0Qm6aVFiLUQvTRKfGcByMRw7q', 0, NULL, NULL, '2020-04-23 23:33:29', NULL, NULL),
-(4, 'david', NULL, 'currota.d@gmail.com', '$2y$10$dS1ZoXchAGgTAB19heIU0Ogso3gM4Fc6c17zsdcH7HblvsZvCnYL.', 0, NULL, NULL, '2020-04-23 23:33:27', NULL, '2020-04-22 19:30:44'),
-(5, 'Nilesh Gupta', NULL, 'ngupta@gmail.com', '$2y$10$eoP2tiXIJuqOw..wg2VP6OKJCDZzwEs2dzPyoC6C64VrLnXzBPEg2', 0, NULL, NULL, '2020-04-23 23:33:26', NULL, '2020-04-22 20:20:11'),
-(6, 'Personal Computer', NULL, 'dipam.asdasdasdparmar@gmail.com', '$2y$10$nPnjZjh5OfgLc3cV1NmkbexyRXnNF0Lecy1C5tlDITFSZHLrPgGL2', 0, NULL, NULL, '2020-04-23 23:33:25', NULL, '2020-04-22 21:56:09'),
-(7, 'ram', NULL, 'ram.sharma@gmail.com', '$2y$10$.O5w2U/.GIlvcNxh27pZEeNxnmOW4CVXsZ8OaOSQRmsg9518XGhtK', 0, NULL, NULL, '2020-04-23 23:33:23', '2020-04-23 12:21:55', '2020-04-23 12:21:55'),
-(8, 'shivam', NULL, 'shivam.verma@gmail.com', '$2y$10$VEbT.kdcfVtJCflDXRFagOgju89Sl5cW94J05uTmIGvtzHyTuIsSO', 0, '1587684785.jpeg', NULL, '2020-04-23 23:33:08', NULL, '2020-04-23 23:33:08');
+(1, 'david d', NULL, 'dipam.parmar@gmail.com', '$2y$10$2EAlNOYdbd5Z5q4AuiS7S.7f76dcwxL/bsQsAQxPScOxmMysvaqzG', 0, '1587760875.jpg', NULL, '2020-04-24 23:53:29', '2020-04-24 23:53:29', '2020-04-24 20:41:15'),
+(2, 'nilesh g', NULL, 'ngupta@gmail.com', '$2y$10$2EAlNOYdbd5Z5q4AuiS7S.7f76dcwxL/bsQsAQxPScOxmMysvaqzG', 0, '1587760906.jpg', NULL, '2020-04-24 23:43:54', '2020-04-24 22:41:21', '2020-04-24 20:41:46');
 
 --
 -- Indexes for dumped tables
@@ -228,7 +229,7 @@ ALTER TABLE `projects`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

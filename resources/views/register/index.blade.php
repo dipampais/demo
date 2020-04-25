@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.registration')
 
 @section('content')
 <div class="container">
@@ -128,4 +128,3 @@
         </div>
     </div>
 </div>
-@endsection

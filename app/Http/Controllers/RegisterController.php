@@ -47,35 +47,80 @@ class RegisterController extends Controller
             return view('register.index')->with('error','Password and Confirm Password does not match');
         }
 
-        
-        $image = $request->file('profilePhoto');
-        $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
-        //dd(public_path('/thumbnail'));
-        if (!file_exists(public_path('/thumbnail'))) {
-            mkdir (public_path('/thumbnail'), 0755);
-        }
-        $destinationPath = public_path('/thumbnail');
-        $img = Image::make($image->getRealPath());
-        $img->resize(100, 100, function ($constraint) {
-            $constraint->aspectRatio();
-        })->save($destinationPath.'/'.$input['imagename']);
-   
-        $destinationPath = public_path('/images');
-        $image->move($destinationPath, $input['imagename']);
-   
-        //$this->postImage->add($input);
 
-        $insert = \DB::table('users')->insert(
-            [
-                'name' => $request->name, 
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'created_at' => \DB::raw('now()'),
-                'gender'   => $request->gender, 
-                'profilePhoto'   => $input['imagename'],
-            ]
-        );
-        return view('login.index')->with('success','User Account Created Successfully');
+        $emailExists = \DB::table('users')->select('email')->where('email',$request->email)->count();
+
+       if($emailExists>1)
+        {
+            return view('register.index')->with('error','Email already exists, please register with new email');
+        }
+        else 
+        {
+            $image = $request->file('profilePhoto');
+            $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
+            if (!file_exists(public_path('/thumbnail'))) {
+                mkdir (public_path('/thumbnail'), 0755);
+            }
+            $destinationPath = public_path('/thumbnail');
+            $img = Image::make($image->getRealPath());
+
+            
+            $destinationPath = public_path('/images');
+            $image->move($destinationPath, $input['imagename']);
+            
+
+            $img = imagecreatefromjpeg($destinationPath.'/'.$input['imagename']);   // load the image-to-be-saved
+
+           
+            imagejpeg($img, $destinationPath.'/'.$input['imagename'],50);
+
+           
+            $insert = \DB::table('users')->insert(
+                [
+                    'name' => $request->name, 
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                    'created_at' => \DB::raw('now()'),
+                    'gender'   => $request->gender, 
+                    'profilePhoto'   => $input['imagename'],
+                ]
+            );
+            return view('login.index')->with('success','User Account Created Successfully');
+        }
     }
+
+    public function compressImage($source, $destination, $quality) { 
+        // Get image info 
+        
+        $imgInfo = getimagesize($source); 
+        
+        $mime = $imgInfo['mime']; 
+        
+        // Create a new image from file 
+        switch($mime){ 
+            case 'image/jpeg': 
+                $image = imagecreatefromjpeg($source); 
+                break; 
+            case 'image/jpg': 
+                $image = imagecreatefromjpeg($source); 
+                break;     
+            case 'image/png': 
+                $image = imagecreatefrompng($source); 
+                break; 
+            case 'image/gif': 
+                $image = imagecreatefromgif($source); 
+                break; 
+            default: 
+                $image = imagecreatefromjpeg($source); 
+        } 
+         
+        // Save image 
+
+
+        imagejpeg($image, $destination, $quality); 
+         
+        // Return compressed image 
+        return $destination; 
+    } 
 
 }

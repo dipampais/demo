@@ -18,7 +18,14 @@ class LoginController extends Controller
 
     public function index()
     {
-        return view('login.index');
+        $id = Auth::id();
+        if(!empty($id))
+        {
+            return redirect()->route('route.dashboard');
+        }
+        else {
+            return view('login.index');
+        }
     }
     
 
@@ -30,6 +37,7 @@ class LoginController extends Controller
             'password' => ['required','min:8'], 
         ]);
 
+        
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
