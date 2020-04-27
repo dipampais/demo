@@ -1,13 +1,12 @@
-@extends('projects.layout')
-@section('content')
 
+@extends('layouts.app')
+@section('content')
+<div class="customDivAddProject">
 <div class="row">
         <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Edit Project</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('projects.index') }}"> Back</a>
+            <div class="pull-left display-inline">
+                <h2 class="clsAddProject">Edit Project</h2>
+                <a class="btn btn-primary  mb-3 mt-3" href="{{ route('projects.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -71,4 +70,20 @@
     </div>
    
     </form>
+</div>
 @endsection
+<style>
+ .customDivAddProject {
+    width: 80%;
+    margin-left: 10%;
+}
+a.btn.btn-primary {
+    width: 218px;
+}
+.pull-left.display-inline {
+    display: inline;
+}
+h2.clsAddProject {
+    width: 250px;
+}
+</style>

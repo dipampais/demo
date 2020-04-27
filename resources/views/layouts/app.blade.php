@@ -19,7 +19,6 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
@@ -30,7 +29,7 @@
 
                 <?php 
                 if (Auth::check()) { ?>
-                   <a href="{{route('projects')}}">Projects</a>
+                   <!-- <a href="{{route('projects')}}">Projects</a> -->
                 <?php }
                 ?>
 
@@ -39,14 +38,10 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
                     </ul>
-
-                    <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -57,24 +52,28 @@
                                 </li>
                             @endif
                         @else
-                            <!-- <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                        
+                        
+                        <ul>
+                            <?php 
+                                if(request()->segment(count(request()->segments()))!="dashboard") {
+                            ?>
+                                    <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+                            <?php } ?>    
+                                <li><a href="{{route('projects')}}">Projects</a></li>
+                                <li><a href="{{ route('editProfile') }}">Profile</a></li>
+                                <li>
+                                    <a href="{{route('logout')}}" 
                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li> -->
-                            <div class="toggleDiv">
+                                       document.getElementById('logout-form').submit();">Logout</a>
+                                </li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                        </ul>
+                            
+                        
+                            <!-- <div class="toggleDiv">
                                 <li class="nav-item dropdown">
                                     <a  class="">
                                         Profile <span class="caret"></span>
@@ -82,7 +81,7 @@
                                 </li>
                             </div> 
                             <div class="card showHideProfile">
-                                <img class="imgClass" src="{{ URL::to('/') }}/images/<?php echo Auth::user()->profilePhoto; ?>" style="width:100%">
+                                <img class="imgClass" src="{{ URL::to('/') }}/images/<?php //echo Auth::user()->profilePhoto; ?>" style="width:100%">
                                 <a href="{{ route('editProfile') }}">Edit Profile</a>
                                 <h5 class="displayName">Welcome {{ Auth::user()->name }}</h5>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
@@ -93,7 +92,9 @@
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
-                            </div>
+                            </div>  -->
+
+
                         @endguest
                     </ul>
                 </div>
@@ -109,7 +110,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
     
-      $('.showHideProfile').toggle();
+    $('.showHideProfile').toggle();
     $(document).on('click','.toggleDiv',function() {
        $('.showHideProfile').toggle('slow');
     });
@@ -162,4 +163,30 @@ img.imgClass {
     background-color: #f8f9fa;
     border: 1px solid #671d79;
 }
+
+
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111111;
+}   
 </style>

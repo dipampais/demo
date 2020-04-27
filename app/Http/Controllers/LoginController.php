@@ -21,7 +21,7 @@ class LoginController extends Controller
         $id = Auth::id();
         if(!empty($id))
         {
-            return redirect()->route('route.dashboard');
+            return redirect()->route('dashboard');
         }
         else {
             return view('login.index');
@@ -42,7 +42,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             //return view('dashboard.index');
-            return redirect()->route('route.dashboard');
+            return redirect()->route('dashboard');
         }
         else {
             return view('login.index')->with('error','Please enter valid credentials');

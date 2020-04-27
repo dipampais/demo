@@ -143,7 +143,7 @@
         </div>
     </div>
 </div>
-
+@endsection
 <style>
 img#uploadedImage {
     align-items: center;

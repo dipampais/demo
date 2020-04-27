@@ -7,10 +7,10 @@
 
 <div class="row">
         <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
+            <div class="text-center">
                 <h2>Project Listing</h2>
             </div>
-            <div class="pull-right">
+            <div class="text-right pb-4 pr-4">
                 <a class="btn btn-success" href="{{ route('projects.create') }}"> Create New Project</a>
             </div>
         </div>
@@ -46,12 +46,13 @@
                 <form action="{{ route('projects.destroy',$project->id) }}" method="POST">
   
                     <!-- <a class="btn btn-info" href="{{ route('projects.show',$project->id) }}">Show</a> -->
-
-                    <a class="btn btn-primary" href="{{ url('projects/edit',$project->id) }}">Edit</a>
-                    @csrf
-                    @method('DELETE')
-                    <input type="hidden" name="hdn_id" value="{{ $project->id}}" />
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <div class="" style="display:inline">
+                        <a class="btn btn-primary" href="{{ url('projects/edit',$project->id) }}">Edit</a>
+                        @csrf
+                        @method('DELETE')
+                        <input type="hidden" name="hdn_id" value="{{ $project->id}}" />
+                        <button type="submit" class="btn btn-danger" style="width:100px">Delete</button>
+                    </div>
                 </form>
             </td>
         </tr>
