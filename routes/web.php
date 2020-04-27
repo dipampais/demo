@@ -32,6 +32,11 @@ Route::post('/profile', 'ProfileController@updateProfile')->name('updateProfile'
 
 Route::post('/register/registerUser', 'RegisterController@registerUser')->name('registerUser');
 
+
+Route::get('/admin', function () {
+    return view('admin.dashboard');
+});
+
 Route::group(['middleware' => ['auth']], function() {
     // Route::get('/dashboard', 'DashboardController@index')->name('route.dashboard');
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
