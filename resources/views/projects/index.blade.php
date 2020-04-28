@@ -22,7 +22,7 @@
         </div>
     @endif
    
-    <table class="table table-bordered">
+    <table class="table table-striped table-bordered datatable tableProjects">
         <tr>
             <th>No</th>
             <th>Title</th>
@@ -37,12 +37,12 @@
             $categoryName = $category->name;
         ?>
         <tr>
-            <td>{{ $project->id }}</td>
+            <td >{{ $project->id }}</td>
             <td>{{ $project->title }}</td>
             <td>{{ $project->description }}</td>
             <td>{{ $categoryName }}</td>
             <td>{{ $project->status }}</td>
-            <td>
+            <td colspan="2">
                 <form action="{{ route('projects.destroy',$project->id) }}" method="POST">
   
                     <!-- <a class="btn btn-info" href="{{ route('projects.show',$project->id) }}">Show</a> -->
@@ -58,4 +58,7 @@
         </tr>
         @endforeach
     </table>      
+@endsection
+
+@section('scripts')
 @endsection
