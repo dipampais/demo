@@ -22,15 +22,18 @@
         </div>
     @endif
    
-    <table class="table table-striped table-bordered datatable tableProjects">
-        <tr>
-            <th>No</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Category</th>
-            <th>Status</th>
-            <th width="280px">Action</th>
-        </tr>
+    <table class="table table-striped table-bordered tableProjects" id="tableProjects">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Status</th>
+                <th width="280px">Action</th>
+            </tr>
+        </thead>
+        
         @foreach ($projects as $project)
         <?php   
             $category = \DB::table('category')->where('id',$project->category_id)->first();
@@ -42,10 +45,8 @@
             <td>{{ $project->description }}</td>
             <td>{{ $categoryName }}</td>
             <td>{{ $project->status }}</td>
-            <td colspan="2">
+            <td>
                 <form action="{{ route('projects.destroy',$project->id) }}" method="POST">
-  
-                    <!-- <a class="btn btn-info" href="{{ route('projects.show',$project->id) }}">Show</a> -->
                     <div class="" style="display:inline">
                         <a class="btn btn-primary" href="{{ url('projects/edit',$project->id) }}">Edit</a>
                         @csrf

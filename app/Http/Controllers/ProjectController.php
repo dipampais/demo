@@ -10,7 +10,15 @@ class ProjectController extends Controller
    
     public function index()
     {
-        $projects = Project::latest()->paginate(5);
+        $projects = Project::orderBy('id', 'desc')->get();
+        $data['projects'] = $projects;
+        return view('projects.index',$data);
+    }
+
+
+    public function indexNew()
+    {
+        $projects = Project::orderBy('id', 'desc')->get();
         $data['projects'] = $projects;
         return view('projects.index',$data);
     }

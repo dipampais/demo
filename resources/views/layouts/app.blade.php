@@ -4,22 +4,36 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSRF Token -->
+  
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" defer></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" defer></script>
+    
 
-    <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-    <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+
+<script>
+    $(document).ready(function() {
+        $('.showHideProfile').toggle();
+        $(document).on('click','.toggleDiv',function() {
+            $('.showHideProfile').toggle('slow');
+        });
+        $('#tableProjects').DataTable({
+            "aaSorting": []
+        });
+    });
+</script>
+
 
 </head>
 <body>
@@ -64,6 +78,7 @@
                                     <li><a href="{{route('dashboard')}}">Dashboard</a></li>
                             <?php } ?>    
                                 <li><a href="{{route('projects')}}">Projects</a></li>
+                                <li><a href="{{route('projectAjaxDatatable')}}">Projects Ajax</a></li>
                                 <li><a href="{{ route('editProfile') }}">Profile</a></li>
                                 <li>
                                     <a href="{{route('logout')}}" 
@@ -112,39 +127,8 @@
 </body>
 </html>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<!-- <script src="{{url('/js/datatables/js/jquery-3.3.1.js')}}"></script> -->
 
-<script>
-    $(document).ready(function() {
-    $('.showHideProfile').toggle();
-    $(document).on('click','.toggleDiv',function() {
-       $('.showHideProfile').toggle('slow');
-    });
-    
-        $('.tableProjects').DataTable({
-            
-            // "scrollY" : 800,
-            // "scrollX" : true,
-            // "paging" : false,
-            // "ordering" : true,
-            //"order": [[ 3, "desc" ]],
-            "info" : true,
-            "columns": [
-                {"orderDataType": "dom-text-numeric"},
-                {"orderDataType": "dom-text"},
-                {"orderDataType": "dom-text"},
-                {"orderDataType": "dom-text"},
-                {"orderDataType": "dom-text"},
-                {"orderDataType": "dom-text"}
-            ]
-        });
-    });
-
-</script>
-<script src="{{url('/js/datatables/js/jquery.dataTables.min.js')}}" defer></script>
-<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" defer></script>
 
 
 
@@ -203,7 +187,7 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #333333;
+  /* background-color: #333333; */
 }
 
 li {
@@ -220,5 +204,8 @@ li a {
 
 li a:hover {
   background-color: #111111;
-}   
+} 
+ul.navbar-nav.ml-auto {
+    background-color: #333;
+}  
 </style>
