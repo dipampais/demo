@@ -41,7 +41,9 @@ Route::group(['middleware' => ['auth']], function() {
     // Route::get('/dashboard', 'DashboardController@index')->name('route.dashboard');
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::get('/project', 'ProjectController@index')->name('projects');
-    Route::get('/projectAjaxDatatable', 'ProjectController@indexNew')->name('projectAjaxDatatable');
+    Route::get('/projectAjaxDatatable', 'ProjectController@indexAjax')->name('projectAjaxDatatable');
+    Route::get('projectAjaxDatatableData', 'ProjectController@indexAjaxData')->name('projectAjaxDatatableData');
+    Route::post('/deleteRecord', 'ProjectController@deleteRecord')->name('deleteRecord');
     Route::resource('projects','ProjectController');
     Route::resource('products','ProductController');
     Route::get('/projects/edit/{id}','ProjectController@edit');
