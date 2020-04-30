@@ -23,10 +23,37 @@ class ProjectController extends Controller
     }
 
 
-    public function indexAjaxData(){
+    public function indexAjaxData()
+    {
         
-        $projects = \DB::table('projects')->join('category', 'category.id', '=', 'projects.category_id')->select('projects.id', 'projects.title', 'projects.description', 'projects.description','category.name as category_name','projects.status')->orderBy('projects.id', 'desc')->get();
+        $searchValue = isset(request()->search_value)?request()->search_value:'';
+        $searchBy = isset(request()->search_by)?request()->search_by:'';
         
+        
+        $projects = \DB::table('projects')->join('category', 'category.id', '=', 'projects.category_id')->select('projects.id', 'projects.title', 'projects.description','category.name as category_name','projects.status')->orderBy('projects.id', 'desc')->where('projects.deleted_at', NULL);
+        
+       
+        if($searchBy==1 && $searchValue!='')
+        {
+            $projects->where('projects.title',$searchValue)->get();
+        }
+        else if($searchBy==2 && $searchValue!='')
+        {
+            $projects->where('projects.description',$searchValue)->get();
+        }
+        else if($searchBy==3 && $searchValue!='')
+        {
+            $projects->where('category.name',$searchValue)->get();
+        }
+        else if($searchBy==4 && $searchValue!='')
+        {
+            $projects->where('projects.status',$searchValue)->get();
+        }
+        else {
+            $projects->get();
+        }
+        
+
         return datatables()->of($projects)
             ->addColumn('action', function ($project) {
                 $urlEdit = url("projects/edit",$project->id);
